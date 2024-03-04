@@ -22,10 +22,10 @@ p + geom_boxplot(mapping = aes(x = Age, y = as.factor(Survived)))
 
 # compare built-in histogram to ggplot2 histogram
 hist(titanic_train$Age) # use R's built-in hist()
-p + geom_histogram(aes(x = Age)) # use ggplot2 histogram
+p + geom_histogram(mapping = aes(x = Age)) # use ggplot2 histogram
 
 # overlapping histograms
-p + geom_histogram(aes(x = Age, fill = as.factor(Survived))) +
+p + geom_histogram(mapping = aes(x = Age, fill = as.factor(Survived))) +
   ggtitle("Distribution of Age by Titanic Survival Status")
 
 # side-by-side histograms
@@ -34,7 +34,7 @@ p + geom_histogram(aes(x = Age)) +
   ggtitle("Distribution of Age by Titanic Survival Status")
 
 # overlapping density plots
-p + geom_density(aes(x = Age,
+p + geom_density(mapping = aes(x = Age,
                      color = as.factor(Survived),
                      fill = as.factor(Survived)),
                  alpha = 0.25) +
@@ -50,12 +50,12 @@ p + geom_bar(aes(x = Sex, y = Survived),
     ggtitle("Titanic Survival Rate by Gender")
 
 # bar chart of survival probability by passenger class
-p + geom_bar(aes(x = Pclass, y = Survived),
+p + geom_bar(mapping = aes(x = Pclass, y = Survived),
              stat = "summary", fun = "mean") +
     ggtitle("Titanic Survival Rate by Passenger Class")
 
 # stacked bar chart of survival by passenger class
-p + geom_bar(aes(x = Pclass,
+p + geom_bar(mapping = aes(x = Pclass,
                  fill = factor(Survived,
                                labels = c("No", "Yes")))) +
   labs(fill = "Survived") +
@@ -72,8 +72,10 @@ p + geom_bar(aes(x = Pclass,
   ggtitle("Titanic Survival by Passenger Class")
 
 # bar chart of interaction between class and sex
-p + geom_bar(aes(x = Pclass, y = Survived, fill = Sex),
-           position = "dodge", stat = "summary", fun = "mean") +
+p + geom_bar(mapping = aes(x = Pclass, y = Survived, fill = Sex),
+           position = "dodge",
+           stat = "summary",
+           fun = "mean") +
   ylab("Survival Proportion") +
   ggtitle("Titanic Survival Rate by Class and Sex")
 
